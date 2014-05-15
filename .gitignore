@@ -1,0 +1,6 @@
+*~
+.*.sw*
+.DS_Store
+*.jar
+*.class
+/target
