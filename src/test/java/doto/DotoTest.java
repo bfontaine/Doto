@@ -6,9 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 interface Vehicule {
-    public void setWheels(int w);
-    public void setDoors(int d);
-    public void setColor(String c);
+    public Vehicule setWheels(int w);
+    public Vehicule setDoors(int d);
+    public Vehicule setColor(String c);
 
     // getters
     public int getWheels();
@@ -24,9 +24,9 @@ class Car implements Vehicule {
     private String color;
 
     // setters
-    public void setWheels(int w) { wheels = w; }
-    public void setDoors(int d) { doors = d; }
-    public void setColor(String c) { color = c; }
+    public Vehicule setWheels(int w) { wheels = w; }
+    public Vehicule setDoors(int d) { doors = d; }
+    public Vehicule setColor(String c) { color = c; }
 
     // getters
     public int getWheels() { return wheels; }
@@ -39,13 +39,11 @@ class Car implements Vehicule {
 }
 
 public class DotoTest {
-    protected Car car;
     protected Vehicule dcar;
 
     @Before
     public void setUp() throws Exception {
-        car = new Car();
-        dcar = (Vehicule)Doto.doto(car, "doto.Vehicule");
+        dcar = Doto.doto(new Car(), "doto.Vehicule");
     }
 
     @After
