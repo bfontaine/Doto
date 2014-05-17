@@ -1,4 +1,4 @@
-# doto
+# Doto
 
 `Doto` is a proxy class to make quick builders.
 
