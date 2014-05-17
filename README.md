@@ -46,6 +46,10 @@ me.setName("Bob");
 With Doto, you can do the same using chained calls:
 
 ```java
+import doto.Doto;
+
+// ...
+
 Human me = Doto.doto(new Human())
                .set("eyes", 2)
                .set("noses", 1)
