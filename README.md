@@ -76,7 +76,7 @@ But Java’s proxies made it hard to have a clean API without requiring too much
 work from the developper.
 
 Please note that Doto is more a proof of concept than a production-ready
-library. It uses reflection and thus is not as optimized by the compiler than
+library. It uses reflection and thus is not as optimized by the compiler as
 “real” code.
 
 [cd]: http://clojuredocs.org/clojure_core/clojure.core/doto
