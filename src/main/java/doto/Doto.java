@@ -1,34 +1,45 @@
 package doto;
 
-import java.beans.Statement;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 
-public class Doto<T> implements InvocationHandler {
+public class Doto<T> {
 
-    private final Object delegate;
+    private final T delegate;
+    private final Class<?> klass;
 
     /**
-     * Wrap an object with a Doto proxy
-     * @param delegate the object to wrap
+     * Wrap an object in a Doto class
+     * @param delegate the wrapped object
      **/
-    public static <T> T doto(Object delegate, Class klass) {
-        ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        return (T)Proxy.newProxyInstance(cl, new Class[]{klass},
-                                             new Doto(delegate));
+    public static <T> Doto doto(T delegate) {
+        return new Doto(delegate);
     }
 
-    public static <T> T doto(Object delegate, String className)
-            throws ClassNotFoundException {
-        return doto(delegate, Class.forName(className));
-    }
-
-    private Doto(Object delegate) {
+    private Doto(T delegate) {
         this.delegate = delegate;
+        this.klass = delegate.getClass();
     }
 
-    public Doto<T> invoke(Object proxy, Method method, Object[] args)
-            throws Throwable {
-        method.invoke(delegate, args);
+    /**
+     * Return the underlying object.
+     **/
+    public T create() {
+        return (T)delegate;
+    }
+
+    /**
+     * Set a property on the underlying object and return itself. This allows
+     * chained calls.
+     * @param name the property's name
+     * @param value the value to set
+     * @return the current Doto object
+     **/
+    public Doto set(String name, Object value)
+            throws NoSuchFieldException, IllegalAccessException {
+        Field f = klass.getDeclaredField(name);
+        f.setAccessible(true);
+        f.set(delegate, value);
+
         return this;
     }
 }
