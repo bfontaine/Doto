@@ -1,5 +1,7 @@
 # Doto
 
+[![Build Status](https://travis-ci.org/bfontaine/Doto.svg?branch=master)](https://travis-ci.org/bfontaine/Doto)
+
 `Doto` is a proxy class to make quick builders.
 
 ## Building
